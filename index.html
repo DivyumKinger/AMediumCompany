@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +11,12 @@
             padding: 0;
             background-color: #f0f0f0;
         }
-
         header {
             background-color: #0a192f;
             color: white;
             text-align: center;
             padding: 20px;
         }
-
         .logo {
             width: 100px;
             height: 100px;
@@ -29,33 +25,26 @@
             vertical-align: middle;
             margin-right: 20px;
         }
-
         h1 {
             display: inline-block;
             vertical-align: middle;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .form-group {
             margin-bottom: 15px;
         }
-
         label {
             display: block;
             margin-bottom: 5px;
         }
-
-        input[type="text"],
-        input[type="password"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 5px;
         }
-
         button {
             background-color: #4CAF50;
             color: white;
@@ -63,18 +52,14 @@
             border: none;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
         }
-
-        #admin-dashboard,
-        #employee-dashboard {
+        #admin-dashboard, #employee-dashboard {
             display: none;
         }
     </style>
 </head>
-
 <body>
     <header>
         <img src="logo.png" alt="TechnoCore Solutions Logo" class="logo">
@@ -116,14 +101,14 @@
     <script>
         // Simulated user data
         const users = [
-            {username: 'admin', password: 'admin123', role: 'admin'},
-            {username: 'employee', password: 'emp123', role: 'employee'}
+            { username: 'admin', password: 'admin123', role: 'admin' },
+            { username: 'employee', password: 'emp123', role: 'employee' }
         ];
 
         // Simulated task data
         let tasks = [
-            {id: 1, description: 'Complete project proposal', assignedTo: 'employee'},
-            {id: 2, description: 'Review quarterly reports', assignedTo: 'admin'}
+            { id: 1, description: 'Complete project proposal', assignedTo: 'employee' },
+            { id: 2, description: 'Review quarterly reports', assignedTo: 'admin' }
         ];
 
         function login() {
@@ -187,5 +172,4 @@
         }
     </script>
 </body>
-
 </html>
