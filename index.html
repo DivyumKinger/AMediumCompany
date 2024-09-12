@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnoCore Solutions - Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #0a192f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 20px;
+        }
+
+        h1 {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #admin-dashboard,
+        #employee-dashboard {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" alt="TechnoCore Solutions Logo" class="logo">
+        <h1>TechnoCore Solutions</h1>
+    </header>
+
+    <div class="container">
+        <div id="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="admin-dashboard">
+            <h2>Admin Dashboard</h2>
+            <button onclick="logout()">Logout</button>
+            <h3>All Tasks</h3>
+            <ul id="admin-task-list"></ul>
+            <h3>Add New Task</h3>
+            <input type="text" id="new-task" placeholder="New task description">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <div id="employee-dashboard">
+            <h2>Employee Dashboard</h2>
+            <button onclick="logout()">Logout</button>
+            <h3>My Tasks</h3>
+            <ul id="employee-task-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Simulated user data
+        const users = [
+            {username: 'admin', password: 'admin123', role: 'admin'},
+            {username: 'employee', password: 'emp123', role: 'employee'}
+        ];
+
+        // Simulated task data
+        let tasks = [
+            {id: 1, description: 'Complete project proposal', assignedTo: 'employee'},
+            {id: 2, description: 'Review quarterly reports', assignedTo: 'admin'}
+        ];
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                document.getElementById('login-form').style.display = 'none';
+                if (user.role === 'admin') {
+                    document.getElementById('admin-dashboard').style.display = 'block';
+                    displayAdminTasks();
+                } else {
+                    document.getElementById('employee-dashboard').style.display = 'block';
+                    displayEmployeeTasks();
+                }
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        function logout() {
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('employee-dashboard').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function displayAdminTasks() {
+            const taskList = document.getElementById('admin-task-list');
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = `${task.description} (Assigned to: ${task.assignedTo})`;
+                taskList.appendChild(li);
+            });
+        }
+
+        function displayEmployeeTasks() {
+            const taskList = document.getElementById('employee-dashboard');
+            taskList.innerHTML = '';
+            tasks.filter(task => task.assignedTo === 'employee').forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = task.description;
+                taskList.appendChild(li);
+            });
+        }
+
+        function addTask() {
+            const newTaskDesc = document.getElementById('new-task').value;
+            if (newTaskDesc) {
+                tasks.push({
+                    id: tasks.length + 1,
+                    description: newTaskDesc,
+                    assignedTo: 'employee'
+                });
+                document.getElementById('new-task').value = '';
+                displayAdminTasks();
+            }
+        }
+    </script>
+</body>
+
+</html>
